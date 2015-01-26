@@ -1,0 +1,9 @@
+test-results/
+tmp/
+routes/
+
+.idea/
+*.iml
+
+*.pyc
+

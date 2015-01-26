@@ -1,0 +1,12 @@
+  {{if eq .RunMode "dev"}}
+    {{template "debug.html" .}}
+  {{end}}
+
+      {% include disqus.html %}
+      </div>
+      </div>
+
+      {% include footer.html %}
+      </div>
+      </body>
+  </html>
