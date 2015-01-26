@@ -1,0 +1,22 @@
+{{set . "title" "GitHub"}}
+{{template "header.html" .}}
+
+
+{{range $r := .repos }}
+
+        <h1>{{$r.Name}}</h1>
+        <code>{{$r.CloneURL}}</code>
+        <p>{{$r.Description}}</p>
+        <p>{{$r.FullName}}</p>
+        <p>{{$r.UpdatedAt}}</p>
+{{end}}
+
+<div class="container">
+    <div class="row">
+        <div class="span6">
+            {{template "flash.html" .}}
+        </div>
+    </div>
+</div>
+
+{{template "footer.html" .}}

@@ -1,9 +1,11 @@
 package controllers
 
 import (
+	"bufio"
 	"fmt"
 	"os"
-	"bufio"
+	"os/exec"
+
 	//"//io/ioutil"
 	"html/template"
 	//"path/filepath"
@@ -144,4 +146,19 @@ func ReadMarkdownPage( section, page string) PageData {
 
 	return pd
 
+}
+
+func GetGoDocPackage(package_path string) template.HTML {
+
+	go_file_path := "github.com/revel/" + package_path //revel/" // + go_file
+	fmt.Println("sources=", go_file_path)
+	app := "godoc"
+
+	cmd := exec.Command(app, "-html", go_file_path)
+	stdout, err := cmd.Output()
+	if err != nil {
+		fmt.Println(err.Error())
+		//return
+	}
+	return template.HTML(stdout)
 }

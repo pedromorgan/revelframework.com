@@ -2,10 +2,10 @@ package controllers
 
 import (
 	//"fmt"
-	//"os"
+	//"os/exec"
 	//"bufio"
 	//"//io/ioutil"
-	//"html/template"
+	"html/template"
 	"path/filepath"
 	//"strings"
 
@@ -25,6 +25,7 @@ type CurrPage struct {
 	PageTitle string
 	//Version string
 	Lang string
+	Content template.HTML
 }
 
 //var Site *SiteStruct
@@ -89,11 +90,25 @@ func (c Pages) Markdown(site_section, ver, lang, page string) revel.Result {
 
 func (c Pages) Godoc(go_file string) revel.Result {
 
-
-
 	cPage := GetCurrPage("docs/godoc", "Go Docs", "0.16", "en", go_file)
 
+	/*
+	go_file_path := CLONES_DIR + "/revel/" // + go_file
+
+
+	app := "godoc"
+
+	cmd := exec.Command(app, "-html", go_file_path)
+	stdout, err := cmd.Output()
+	if err != nil {
+		fmt.Println(err.Error())
+		//return
+	}
+	*/
+	c.RenderArgs["page_content"] = GetGoDocPackage("revel/templates/")
 	cPage.PageTitle = go_file
+
+
 
 
 	c.RenderArgs["cPage"] = cPage
@@ -104,6 +119,14 @@ func (c Pages) Godoc(go_file string) revel.Result {
 
 
 func (c Pages) Github() revel.Result {
+
+
+	repos, err := GetReposList()
+	if err != nil {
+		//TODO
+	}
+	c.RenderArgs["repos"] = repos
+
 	return c.Render()
 }
 

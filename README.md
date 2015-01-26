@@ -7,13 +7,17 @@
 Ideas are to..
     - automate the release cycle and docs
     - create an integrated system
-    - make applcation docs, source code and all work together
+    - make application docs, source code and all work together
     - provide a platform for international
 
-Current Issues:
+Current revel docs Issues:
 - Currently docs are on revel.github.io..
 - This restrict things such as no running plugins.. 
 - and its written in ruby, and outta out control..in gopher land
+
+
+
+
 
 
 Research
@@ -53,16 +57,11 @@ Expect to use..
 - any third party modules register and testing
 
 
-To avoid name space clashes, and confusion..
-
-Git submodules are in the kittens/ directory 
-.. with the plastic penquins and windows cds
-
 
 
 
 ====================
-REQUIREMENTS:
+APP REQUIREMENTS:
 ====================
 
 templates:
@@ -80,6 +79,7 @@ This includes the icon and warning and color configurable..
 do not:
 - and this and {{man links}}
 ```
+
 
 ====================
 Remove slaving
