@@ -9,7 +9,8 @@ GET     /github                                 App.GithubPage
 GET     /manual/:ver/:lang/:page                App.ManualPage
 
 
-# Ignore favicon requests
+GET     /robots.txt                             App.RobotsTxt
+
 GET     /favicon.ico                            Static.Serve("public","img/favicon.ico")
 GET     /favicon.png                            Static.Serve("public","img/favicon.png")
 

@@ -15,7 +15,7 @@ import (
 	"github.com/pksunkara/pygments"
 )
 
-var CLONES_DIR = os.Getenv("GOPATH") + "/src/github.com/pedromorgan/revel-puppy/externals"
+var CLONES_DIR = os.Getenv("GOPATH") + "/src/github.com/pedromorgan/revel-www/externals"
 
 type CurrPage struct {
 	//Title string
@@ -44,6 +44,17 @@ func (c App) IndexPage() revel.Result {
 	return c.Render()
 }
 
+// Only allow spiders on prod site
+func (c App) RobotsTxt() revel.Result {
+
+	s := "User-agent: *\n"
+	if revel.Config.BoolDefault("site.robots", false)  == false {
+		s += "Disallow: /\n"
+	}
+	s += "\n"
+
+	return c.RenderText(s)
+}
 
 
 func (c App) ManualPage(ver, lang, page string) revel.Result {
