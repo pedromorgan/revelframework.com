@@ -4,12 +4,13 @@
 
 module:testrunner
 
-GET     /                                       App.IndexPage
-GET     /github                                 App.GithubPage
-GET     /manual/:ver/:lang/:page                App.ManualPage
+GET     /                                       Pages.Index
+GET     /github                                 Pages.Github
+GET     /docs/godoc/:go_file                    Pages.Godoc
+GET     /:site_section/:ver/:lang/:page         Pages.Markdown
 
 
-GET     /robots.txt                             App.RobotsTxt
+GET     /robots.txt                             Pages.RobotsTxt
 
 GET     /favicon.ico                            Static.Serve("public","img/favicon.ico")
 GET     /favicon.png                            Static.Serve("public","img/favicon.png")

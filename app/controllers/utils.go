@@ -6,103 +6,14 @@ import (
 	"bufio"
 	//"//io/ioutil"
 	"html/template"
-	"path/filepath"
+	//"path/filepath"
 	"strings"
 
-	"github.com/revel/revel"
+	//"github.com/revel/revel"
 	"github.com/russross/blackfriday"
 	"gopkg.in/yaml.v2"
 	"github.com/pksunkara/pygments"
 )
-
-var CLONES_DIR = os.Getenv("GOPATH") + "/src/github.com/pedromorgan/revel-www/externals"
-
-type CurrPage struct {
-	//Title string
-	Version string
-	SectionUrl string
-	SectionTitle string
-	PageUrl string
-	PageTitle string
-	//Version string
-	Lang string
-}
-
-//var Site *SiteStruct
-
-func GetCurrPage(section, section_title, version, lang, page string) CurrPage {
-
-	s := CurrPage{SectionUrl: section, SectionTitle: section_title, PageUrl: page, Version: version, Lang: lang}
-	return s
-}
-
-type App struct {
-	*revel.Controller
-}
-
-func (c App) IndexPage() revel.Result {
-	return c.Render()
-}
-
-// Only allow spiders on prod site
-func (c App) RobotsTxt() revel.Result {
-
-	s := "User-agent: *\n"
-	if revel.Config.BoolDefault("site.robots", false)  == false {
-		s += "Disallow: /\n"
-	}
-	s += "\n"
-
-	return c.RenderText(s)
-}
-
-
-func (c App) ManualPage(ver, lang, page string) revel.Result {
-
-	site_section := "manual"
-
-	cPage := GetCurrPage(site_section, "Manual", ver, lang, page)
-
-
-	nav := GetNav(site_section)
-	c.RenderArgs["nav"] = nav
-
-
-	page_no_ext := page
-	if filepath.Ext(page) == ".html" { // wtf includes the .
-		page_no_ext = page[0: len(page) - 5]
-	}
-
-	// the file path to the jekyll markdown file
-	//md_file_path := CLONES_DIR + "/revel.github.io/manual/" + page_no_ext + ".md"
-
-	// read the file
-	// TODO check  it exists or catch error
-	//raw_md_bytes, err := ioutil.ReadFile(md_file_path)
-	//if err != nil {
-	//	fmt.Println("errrr", err)
-	//}
-
-	// convert markdown to html
-	//page_html_bytes := blackfriday.MarkdownCommon(raw_md_bytes)
-	//fmt.Println("html", string(page_html_bytes))
-
-	// use template.HTML to "unespae" encoding.. ie proper html not &lt;escaped
-	pdata := ReadMarkdownPage(site_section, page_no_ext)
-	c.RenderArgs["page_content"] = pdata.HTML
-	//c.RenderArgs["md"] = md
-
-
-	cPage.PageTitle = pdata.Title
-	c.RenderArgs["cPage"] = cPage
-
-	return c.Render()
-}
-
-func (c App) GithubPage() revel.Result {
-	return c.Render()
-}
-
 
 type YamlJekyllPage struct {
 	Title string ` yaml:"title" `
@@ -120,6 +31,7 @@ type PageData struct {
 // title: foo
 // layout: manual
 // ---
+// TODO , this is real slow and needs a regex expert
 func ReadMarkdownPage( section, page string) PageData {
 
 	var pd PageData
@@ -165,7 +77,7 @@ func ReadMarkdownPage( section, page string) PageData {
 					//fmt.Println("GOT CODE=" , line, xline)
 					lexer = xline
 					//if line == "{% highlight go %}" {
-						//body_str += "``` go\n"
+					//body_str += "``` go\n"
 					body_str += "\n"
 					code_str = ""
 					in_code = true

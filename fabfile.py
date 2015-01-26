@@ -23,11 +23,14 @@ env.user = "revel"
 env.password = "using-ssh-ssl-key"
 env.use_ssh_config = True # this is using ~/.ssh/config = sshkey login
 
+## repositories with url / branch
 repos = [
-	"github.com/revel/revel",
-	"github.com/revel/modules",
-	"github.com/revel/cmd",
-	"github.com/revel/revel.github.io"
+	["github.com/revel/revel", "develop"],
+	["github.com/revel/modules", "develop"],
+	["github.com/revel/cmd", "develop"],
+	#["github.com/revel/samples", "master"],
+	#//["github.com/revel/revel.github.io", "develop"]
+	["github.com/pedromorgan/revel.github.io", "www_test"]
 ]
 
 
@@ -35,17 +38,17 @@ def init_clones():
 	"""Clones  repositories to externals/*"""
 	for r in repos:
 		with lcd(CLONES_DIR):
-			local("git clone https://%s.git" % r)
+			local("git clone https://%s.git" % r[0])
 
 
 def update_clones():
 	"""Update clones to latest in dev branch for now"""
 	for r in repos:
-		parts = r.split("/")
+		parts = r[0].split("/")
 		pth = CLONES_DIR + "/%s" % parts[-1]
 		print "path=", pth
 		with lcd(pth):
 			local("git fetch")
-			local("git checkout develop")
-			local("git pull origin develop")
+			local("git checkout %s" % r[1])
+			local("git pull origin %s" % r[1])
 

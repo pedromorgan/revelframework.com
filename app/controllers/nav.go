@@ -7,6 +7,12 @@ import(
 	"gopkg.in/yaml.v2"
 )
 
+/*
+These struct import the yaml jekyll format
+There weare atht the _layouts/foo.html header but extracted
+to /foo/_nav.yaml
+ */
+
 type NavPage struct {
 	Label string ` yaml:"title" `
 	Url string ` yaml:"url" `
