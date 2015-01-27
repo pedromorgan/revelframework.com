@@ -33,6 +33,9 @@ repos = [
 	["github.com/pedromorgan/revel.github.io", "www_dev"]
 ]
 
+def run():
+	local("revel run github.com/pedromorgan/revel-www")
+
 
 def setup():
 	goget()
