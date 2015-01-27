@@ -34,6 +34,11 @@ repos = [
 ]
 
 
+def setup():
+	goget()
+	init_clones()
+	update_clones()
+
 def goget():
 	"""Read go_deps.txt and runs go get.. wtf"""
 	f = open(ROOT_DIR + "/go_deps.txt", "r")
@@ -53,7 +58,7 @@ def init_clones():
 			print "repo=", WORK_DIR + "/" + parts[-1]
 			if not os.path.exists(WORK_DIR + "/" + parts[-1]):
 				local("git clone https://%s.git" % r[0])
-
+	update_clones()
 
 def update_clones():
 	"""Update clones to latest in dev branch for now"""

@@ -5,6 +5,12 @@ import(
 	"github.com/google/go-github/github"
 )
 
+/*
+basic version that fetched all revel stuff from API
+TODO need caching etc and below proof of concept..
+
+ */
+
 type Repo struct {
 
 
