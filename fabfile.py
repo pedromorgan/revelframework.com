@@ -16,9 +16,9 @@ from fabric import colors
 
 
 ROOT_DIR = os.path.dirname(os.path.realpath(__file__))
-CLONES_DIR = ROOT_DIR + "/externals"
+WORK_DIR = ROOT_DIR + "/workspace"
 
-env.hosts = ['revel-puppy.daffodil.uk.com']
+env.hosts = ['revel-www.daffodil.uk.com']
 env.user = "revel"
 env.password = "using-ssh-ssl-key"
 env.use_ssh_config = True # this is using ~/.ssh/config = sshkey login
@@ -34,18 +34,32 @@ repos = [
 ]
 
 
+def goget():
+	"""Read go_deps.txt and runs go get.. wtf"""
+	f = open(ROOT_DIR + "/go_deps.txt", "r")
+	s = f.read()
+	f.close()
+	for line in s.split("\n"):
+		naked = line.strip()
+		if naked != "":
+			local("go get %s" % naked)
+
 def init_clones():
 	"""Clones  repositories to externals/*"""
+	print "#>>>> Initialising clones"
 	for r in repos:
-		with lcd(CLONES_DIR):
-			local("git clone https://%s.git" % r[0])
+		with lcd(WORK_DIR):
+			parts = r[0].split("/")
+			print "repo=", WORK_DIR + "/" + parts[-1]
+			if not os.path.exists(WORK_DIR + "/" + parts[-1]):
+				local("git clone https://%s.git" % r[0])
 
 
 def update_clones():
 	"""Update clones to latest in dev branch for now"""
 	for r in repos:
 		parts = r[0].split("/")
-		pth = CLONES_DIR + "/%s" % parts[-1]
+		pth = WORK_DIR + "/%s" % parts[-1]
 		print "path=", pth
 		with lcd(pth):
 			local("git fetch")
