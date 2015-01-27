@@ -17,13 +17,17 @@ and the install script gets all the go and externals..
 
 Externals as considered external repos.
 
+workspace
+-------------------
+
 `workspace` is the default directory within the tree..
 this could be external, but nervous about permissions..
 
 
 To setup
 
-init_clones()
+    > fab init_clones
+
 # clones all the dirs listed in repos
 
 
@@ -36,6 +40,7 @@ so look a "markdown renderer/convert" and find
 https://github.com/russross/blackfriday
 
 So makes html and in
+well dodgy code..
 
 
 
