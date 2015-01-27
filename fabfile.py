@@ -30,7 +30,7 @@ repos = [
 	["github.com/revel/cmd", "develop"],
 	#["github.com/revel/samples", "master"],
 	#//["github.com/revel/revel.github.io", "develop"]
-	["github.com/pedromorgan/revel.github.io", "www_test"]
+	["github.com/pedromorgan/revel.github.io", "www_dev"]
 ]
 
 
