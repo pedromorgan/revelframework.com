@@ -6,7 +6,7 @@ module:testrunner
 
 GET     /                                       Pages.Index
 GET     /github                                 Pages.Github
-GET     /docs/godoc/:go_file                    Pages.Godoc
+GET     /godoc/:package                         Pages.Godoc
 GET     /:site_section/:ver/:lang/:page         Pages.Markdown
 
 
