@@ -33,8 +33,13 @@ repos = [
 	["github.com/pedromorgan/revel.github.io", "www_dev"]
 ]
 
-def run():
+def run_loc():
+	"""Run revel app local in dev mode"""
 	local("revel run github.com/pedromorgan/revel-www")
+
+def up_test():
+	"""Update test server """
+	local("git push origin master")
 
 
 def setup():
