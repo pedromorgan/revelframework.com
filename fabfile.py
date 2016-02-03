@@ -26,14 +26,15 @@ env.use_ssh_config = True # this is using ~/.ssh/config = sshkey login
 ## repositories with url / branch
 repos = [
 	["github.com/revel/revel", "develop"],
-	["github.com/revel/modules", "develop"],
-	["github.com/revel/cmd", "develop"],
+	["github.com/revel/modules", "master"],
+	["github.com/revel/cmd", "master"],
+	["github.com/revel/samples", "master"],
 	#["github.com/revel/samples", "master"],
 	#//["github.com/revel/revel.github.io", "develop"]
-	["github.com/pedromorgan/revel.github.io", "www_dev"]
+	["github.com/revel/revel.github.io", "develop"]
 ]
 
-def run_loc():
+def run():
 	"""Run revel app local in dev mode"""
 	local("revel run github.com/pedromorgan/revel-www")
 

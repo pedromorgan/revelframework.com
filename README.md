@@ -1,6 +1,6 @@
-# Welcome to Revel Website application in Revel
+# revelframework.com in revel
 
-- The revel www is an application that makes the revel website, manual etc work.
+- The revel www is revel application that makes the revel website, manual etc work.
 - The revel site in revel is (Dog Food)[http://en.wikipedia.org/wiki/Eating_your_own_dog_food] in software. 
 
 
